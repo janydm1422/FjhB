@@ -40,7 +40,7 @@ def process_steamdb_result(steamdb_result,msg):
         game_name = str(tds[tds_length - 5].find("b").contents[0])
         sub_id = str(tds[tds_length - 5].contents[1].get('href').split('/')[2])
         steam_url = str(tds[tds_length - 6].contents[1].get('href')).split("?")[0]
-        msg=msg+"n:" + game_name+'|d'+'bu:'+steamdb_url+"|u:" + steam_url+'t:'+free_type
+        msg=msg+"n:" + game_name+'|d'+'bu:'+steamdb_url+"|u:" + steam_url+'|t:'+free_type
     return msg
 
 def main():
