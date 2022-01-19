@@ -17,6 +17,7 @@ jobs:
         run: |
           pip install -r ./app/requirements.txt
           pip install requests
+          pip install pytz
           npm install playwright
           python -m playwright install
           sudo apt-get install libegl1\
