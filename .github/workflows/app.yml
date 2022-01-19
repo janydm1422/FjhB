@@ -1,0 +1,56 @@
+name: app
+on:
+  push:
+  schedule:
+    - cron: '0 8,16,23 * * *'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: 'Set up Python'
+        uses: actions/setup-python@v1
+        with:
+           python-version: 3.7
+      - name: 'Install requirements'
+        run: |
+          pip install -r ./app/requirements.txt
+          pip install requests
+          npm install playwright
+          python -m playwright install
+          sudo apt-get install libegl1\
+            libopus0\
+            libwoff1\
+            libharfbuzz-icu0\
+            gstreamer1.0-plugins-base\
+            libgstreamer-gl1.0-0\
+            gstreamer1.0-plugins-bad\
+            libopenjp2-7\
+            libwebpdemux2\
+            libenchant1c2a\
+            libhyphen0\
+            libgles2\
+            gstreamer1.0-libav
+      - name: 'Working'
+        run: |
+          python app.py
+      - name: 'Commit'
+        run: |
+          cat >> ./id_ed25519 <<EOF
+          ${{ secrets.PRIVATEKEY }}
+          EOF
+          chmod 600 ./id_ed25519
+          ls -l
+          eval $(ssh-agent -s)
+          ssh-agent bash
+          ssh-add ./id_ed25519
+          git clone ${{ secrets.gitfrom }}
+          ls
+          cp -f README.md ./${{ secrets.gitname }}/
+          cd ${{ secrets.gitname }}
+          git config --global user.email "${{ secrets.email }}"
+          git config --global user.name "${{ secrets.name }}"
+          git add README.md
+          git commit -m "Auto Updated"
+          git push
