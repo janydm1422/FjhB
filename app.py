@@ -35,7 +35,7 @@ def process_steamdb_result(steamdb_result,msg):
             free_type = tds[tds_length - 3].contents[2].contents[0] + "Forever"
         start_time_str = str(tds[tds_length - 2].get("data-time"))
         end_time_str = str(tds[tds_length - 1].get("data-time"))
-		url="htt"+"ps://stea"+"mdb.info/upco"+"ming/free/"
+        url="htt"+"ps://stea"+"mdb.info/upco"+"ming/free/"
         steamdb_url = urljoin(url, str(tds[tds_length - 5].contents[1].get("href")))
         game_name = str(tds[tds_length - 5].find("b").contents[0])
         sub_id = str(tds[tds_length - 5].contents[1].get('href').split('/')[2])
