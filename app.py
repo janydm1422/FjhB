@@ -33,6 +33,7 @@ def process_steamdb_result(steamdb_result,msg):
             free_type = tds[tds_length - 3].contents[0]
         else:
             free_type = tds[tds_length - 3].contents[2].contents[0] + "Forever"
+        print(str(free_type))
         start_time_str = str(tds[tds_length - 2].get("data-time"))
         end_time_str = str(tds[tds_length - 1].get("data-time"))
         url="htt"+"ps://stea"+"mdb.info/upco"+"ming/free/"
