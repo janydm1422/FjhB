@@ -2,7 +2,7 @@ name: app
 on:
   push:
   schedule:
-    - cron: '0 8,16,23 * * *'
+    - cron: '0 2,6,8,16,23 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
