@@ -8,13 +8,14 @@ from urllib.parse import urljoin
 import hmac,hashlib,urllib,base64,requests
 def playwright_get_url(url, delay=0, headless=True):
     with sync_playwright() as p:
-        browser = p.webkit.launch(headless=headless)
+        browser = p.webkit.launch(headless=headless);print('初始化中')
         try:
             page = browser.new_page()
-            page.goto(url=url)
+            page.goto(url=url);print('访问页面成功')
             import time
             time.sleep(20)
             html = page.inner_html("*")
+            print('获取页面代码成功!')
         except:
             GET_PAGE_SOURCE_ERROR_MSG = "Get page source error!"
             raise Exception(GET_PAGE_SOURCE_ERROR_MSG)
@@ -54,6 +55,7 @@ def main():
       
 if __name__ == "__main__":
     import hmac,hashlib,requests
+    print('开始运行!')
     msg=main()
     with open (os.path.join(os.getcwd(), "README.md"), 'w', encoding='utf-8') as f:
         f.write(msg)
